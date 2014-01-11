@@ -2,7 +2,7 @@
 while true; do
     while read line; do 
         ip=$(echo $line | awk '{print $2}')
-        ping -qc 10 $ip | tail -n2 > pings/$ip.new &
+        ping -qc 60 $ip | tail -n2 > pings/$ip.new &
     done < ip-name
     wait
     while read line; do 
