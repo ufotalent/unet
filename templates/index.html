@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title> UNet monitor </title>
+        <meta http-equiv="refresh" content="30" >
+    </head>
+    <body>
+        <div>
+            <p>
+            <h1> Registered nodes </h1>
+            </p>
+            <p>
+            <table border="1">
+                <thead>
+                    <th>name</th>
+                    <th>ip</th>
+                    <th>loss rate</th>
+                    <th>round trip time</th>
+                </thead>
+                <tbody>
+                    {% for f in data %}
+                    <tr>
+                        <td>
+                            <a href={{ url_for('list_item', name=f.name) }}> {{f.name}} </a>
+                        </td>
+                        <td> {{ f.ip }} </td>
+                        <td> {{ f.p1}} </td>
+                        <td> {{ f.p2 }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </p>
+        </div>
+
+        <div>
+            <p><h1><a href={{ url_for('sync_script') }}>Syncing script</a></h1></p>
+        </div>
+
+        <div>
+            <p><h1>Submit new node </h1></p>
+            <form action="{{url_for('add_node')}}" method=post>
+                <dl>
+                    <dt>name:
+                    <dd><input type=text name=name />
+                    <dt>content:
+                    <dd><textarea name=content  cols="100" rows="20" placeholder="paste your config file here"></textarea>
+                    <dd><input type=submit value=Add />
+                </dl>
+            </form>
+        </div>
+        <div>
+            <p><h1>Submit node ip</h1></p>
+            <form action="{{url_for('set_node_ip')}}" method=post>
+                <dl>
+                    <dt>name:
+                    <dd><input type=text name=name>
+                    <dt>ip:
+                    <dd><input type=text name=ip>
+                    <dd><input type=submit value=Add>
+                </dl>
+            </form>
+        </div>
+    </body>
+
+</html>
